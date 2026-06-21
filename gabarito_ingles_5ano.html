@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabarito Comentado ✅ — Unit 3 Animals</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,#0e7490,#15803d);min-height:100vh;color:#0f172a;padding:16px;}
+  .wrap{max-width:760px;margin:0 auto;}
+  .top{background:#fff;border-radius:24px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);margin-bottom:16px;}
+  .top h1{color:#0e7490;font-size:1.6em;}
+  .top p{color:#64748b;margin-top:6px;}
+  .back{display:inline-block;margin-top:10px;background:#0e7490;color:#fff;text-decoration:none;padding:8px 16px;border-radius:14px;font-size:.9em;}
+  .panel{background:#fff;border-radius:22px;padding:18px;margin-bottom:16px;box-shadow:0 8px 22px rgba(0,0,0,.15);}
+  .panel h2{color:#15803d;font-size:1.25em;margin-bottom:12px;}
+  table.quick{width:100%;border-collapse:collapse;}
+  table.quick th{background:#0e7490;color:#fff;padding:8px;font-size:.9em;}
+  table.quick td{padding:8px;border-bottom:1px solid #e2e8f0;text-align:center;font-size:.92em;}
+  table.quick td.ans{font-weight:bold;color:#15803d;}
+  table.quick tr:nth-child(even) td{background:#f1f5f9;}
+  .item{border-left:6px solid #22c55e;background:#f8fafc;border-radius:12px;padding:14px;margin:12px 0;}
+  .item .num{display:inline-block;background:#15803d;color:#fff;border-radius:12px;padding:3px 10px;font-weight:bold;font-size:.85em;margin-bottom:8px;}
+  .item .qq{font-weight:bold;margin-bottom:8px;}
+  .item .right{background:#dcfce7;border-radius:8px;padding:8px 10px;margin:6px 0;display:flex;align-items:center;gap:10px;}
+  .item .right b{color:#166534;}
+  .item .why{color:#334155;font-size:.95em;margin-top:6px;}
+  .item .why .x{color:#b91c1c;font-weight:bold;}
+  .spk{background:#0ea5e9;border:none;color:#fff;border-radius:50%;width:32px;height:32px;font-size:.95em;cursor:pointer;flex-shrink:0;}
+  .spk:hover{background:#0284c7;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:6px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#0e7490;color:#fff;padding:12px;border-radius:16px;font-weight:bold;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>✅ Gabarito Comentado</h1>
+    <p>Simulado da Unit 3 — Animals • Respostas explicadas</p>
+    <a class="back" href="index.html">⬅ Voltar ao início</a>
+  </div>
+
+  <div class="panel">
+    <h2>⚡ Tabela rápida de respostas</h2>
+    <table class="quick" id="quick"></table>
+  </div>
+
+  <div class="panel">
+    <h2>📖 Explicação de cada questão</h2>
+    <div id="items"></div>
+  </div>
+
+  <div class="navbtns">
+    <a href="simulado_ingles_5ano.html">⬅ Refazer o Simulado</a>
+    <a href="index.html">🏠 Início</a>
+  </div>
+</div>
+
+<script>
+function speak(t){if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=1;window.speechSynthesis.speak(u);}
+
+const Q=[
+ {q:'The whale is ____ than the seal.',o:['bigger','biggest','more big'],a:0,say:'The whale is bigger than the seal.',e:'"Big" é adjetivo curto, então vira <b>bigger</b> + <b>than</b>. <span class="x">"biggest"</span> seria o mais de todos (superlativo) e <span class="x">"more big"</span> não existe.'},
+ {q:'The seahorse is the ____ of all.',o:['smaller','smallest','most small'],a:1,say:'The seahorse is the smallest of all.',e:'É o menor de TODOS → superlativo curto <b>the smallest</b>. <span class="x">"smaller"</span> compara só dois e <span class="x">"most small"</span> não existe.'},
+ {q:'The shark is ____ than the crab.',o:['more dangerous','dangerouser','most dangerous'],a:0,say:'The shark is more dangerous than the crab.',e:'"Dangerous" é longo (3 sílabas) → <b>more dangerous</b> + <b>than</b>. Não existe <span class="x">"dangerouser"</span>.'},
+ {q:'The butterfly is the most ____.',o:['beautifulest','beautiful','beautifuller'],a:1,say:'The butterfly is the most beautiful.',e:'Depois de <b>the most</b> o adjetivo fica igual: <b>beautiful</b>. <span class="x">"beautifulest"</span> e <span class="x">"beautifuller"</span> não existem.'},
+ {q:'Which animal is a Bird?',o:['eagle','shark','bear'],a:0,say:'The eagle is a bird.',e:'<b>Eagle</b> (águia) é ave. <span class="x">Shark</span> é peixe e <span class="x">bear</span> é mamífero.'},
+ {q:'The bear is ____ than the orangutan.',o:['bigger','biggest','more big'],a:0,say:'The bear is bigger than the orangutan.',e:'Compara dois → <b>bigger than</b>. Curto não usa "more".'},
+ {q:'The parrot is ____ than the eagle.',o:['more colorful','colorfuler','colorfulest'],a:0,say:'The parrot is more colorful than the eagle.',e:'"Colorful" é longo → <b>more colorful</b> + <b>than</b>.'},
+ {q:'Which word means "snake"?',o:['cobra','formiga','aranha'],a:0,say:'snake',e:'<b>Snake</b> = cobra. Formiga = ant e aranha = spider.'},
+ {q:'The lizard is a ____.',o:['reptile','mammal','bird'],a:0,say:'The lizard is a reptile.',e:'<b>Lizard</b> (lagarto) é réptil, como a cobra.'},
+ {q:'The scorpion is the most ____.',o:['dangerous','dangerousest','dangerouser'],a:0,say:'The scorpion is the most dangerous.',e:'Depois de <b>the most</b> o adjetivo fica igual: <b>dangerous</b>.'},
+ {q:'The dolphin is ____ than the seahorse.',o:['faster','fastest','more fast'],a:0,say:'The dolphin is faster than the seahorse.',e:'Curto → <b>faster than</b>. "more fast" não existe.'},
+ {q:'The mouse is the ____ in the forest.',o:['smallest','smaller','most small'],a:0,say:'The mouse is the smallest in the forest.',e:'O menor de todos → <b>the smallest</b>.'},
+ {q:'Qual frase está CORRETA?',o:['The bear is more bigger than the ant.','The bear is bigger than the ant.','The bear is biggest than the ant.'],a:1,say:'The bear is bigger than the ant.',e:'<b>"bigger than"</b> está certo. <span class="x">"more bigger"</span> mistura duas regras e <span class="x">"biggest than"</span> também está errado.'},
+ {q:'Which word means "spider"?',o:['aranha','besouro','rato'],a:0,say:'spider',e:'<b>Spider</b> = aranha. Besouro = beetle e rato = mouse.'},
+ {q:'The snake is ____ than the lizard.',o:['longer','longest','more long'],a:0,say:'The snake is longer than the lizard.',e:'Curto → <b>longer than</b>.'},
+ {q:'The shark is the ____ of all.',o:['meanest','meaner','most mean'],a:0,say:'The shark is the meanest of all.',e:'O mais malvado de todos → <b>the meanest</b>.'},
+ {q:'Which animal is a Mammal?',o:['whale','shark','lizard'],a:0,say:'The whale is a mammal.',e:'<b>Whale</b> (baleia) é mamífero. Shark é peixe e lizard é réptil.'},
+ {q:'The orangutan is the ____ in the forest.',o:['biggest','bigger','most big'],a:0,say:'The orangutan is the biggest in the forest.',e:'O maior de todos → <b>the biggest</b>.'},
+ {q:'The crab is the ____ of all.',o:['hungriest','hungrier','most hungry'],a:0,say:'The crab is the hungriest of all.',e:'"Hungry" termina em -y → troca por <b>-iest</b>: <b>the hungriest</b>.'},
+ {q:'The spider is ____ than the ant.',o:['more dangerous','dangerousest','dangerouser'],a:0,say:'The spider is more dangerous than the ant.',e:'Longo → <b>more dangerous than</b>.'},
+ {q:'Qual frase é um COMPARATIVO (compara DOIS)?',o:['The whale is the biggest.','The shark is bigger than the seal.','The eagle is the most beautiful.'],a:1,say:'The shark is bigger than the seal.',e:'Tem <b>than</b> comparando dois animais = comparativo. As outras têm "the" + superlativo.'},
+ {q:'Which word means "beetle"?',o:['besouro','borboleta','abelha'],a:0,say:'beetle',e:'<b>Beetle</b> = besouro. Borboleta = butterfly.'},
+ {q:'The parrot is the most ____.',o:['colorful','colorfulest','colorfuller'],a:0,say:'The parrot is the most colorful.',e:'Depois de <b>the most</b> o adjetivo fica igual: <b>colorful</b>.'},
+ {q:'The eagle is ____ than the lizard.',o:['more beautiful','beautifuler','beautifulest'],a:0,say:'The eagle is more beautiful than the lizard.',e:'Longo → <b>more beautiful than</b>.'},
+ {q:'The whale is the ____ animal of all.',o:['biggest','bigger','more big'],a:0,say:'The whale is the biggest animal of all.',e:'O maior de todos → <b>the biggest</b>.'}
+];
+
+// tabela rápida (3 colunas de pares Nº/Resposta)
+let rows='<tr><th>Nº</th><th>Resposta</th><th>Nº</th><th>Resposta</th><th>Nº</th><th>Resposta</th></tr>';
+for(let i=0;i<Q.length;i+=3){
+  rows+='<tr>';
+  for(let j=0;j<3;j++){
+    const k=i+j;
+    if(k<Q.length) rows+=`<td>${k+1}</td><td class="ans">${Q[k].o[Q[k].a]}</td>`;
+    else rows+='<td></td><td></td>';
+  }
+  rows+='</tr>';
+}
+document.getElementById('quick').innerHTML=rows;
+
+// explicações
+let html='';
+Q.forEach((item,i)=>{
+  html+=`<div class="item">
+    <span class="num">Questão ${i+1}</span>
+    <div class="qq">${item.q}</div>
+    <div class="right"><b>✅ Resposta: ${item.o[item.a]}</b><button class="spk" onclick="speak('${item.say.replace(/'/g,"\\'")}')">🔊</button></div>
+    <div class="why">${item.e}</div>
+  </div>`;
+});
+document.getElementById('items').innerHTML=html;
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Rápido 🎯 — Unit 3 Animals</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,#be185d,#7c3aed);min-height:100vh;color:#0f172a;padding:16px;}
+  .wrap{max-width:680px;margin:0 auto;}
+  .top{background:#fff;border-radius:24px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);margin-bottom:14px;}
+  .top h1{color:#be185d;font-size:1.6em;}
+  .top p{color:#64748b;margin-top:6px;}
+  .back{display:inline-block;margin-top:10px;background:#be185d;color:#fff;text-decoration:none;padding:8px 16px;border-radius:14px;font-size:.9em;}
+  .hud{position:sticky;top:6px;z-index:30;background:#fff;border-radius:16px;padding:10px 14px;box-shadow:0 6px 18px rgba(0,0,0,.2);margin-bottom:14px;display:flex;justify-content:space-between;font-weight:bold;color:#334155;}
+  .ok{color:#16a34a;} .no{color:#dc2626;}
+  .card{background:#fff;border-radius:20px;padding:18px;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,0,0,.15);}
+  .qnum{display:inline-block;background:#7c3aed;color:#fff;border-radius:50%;width:30px;height:30px;line-height:30px;text-align:center;font-weight:bold;margin-right:8px;}
+  .qt{font-size:1.1em;font-weight:bold;margin:6px 0 12px;}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #cbd5e1;border-radius:12px;padding:11px 14px;margin:7px 0;cursor:pointer;font-size:1em;font-family:inherit;transition:.15s;}
+  .opt:hover{border-color:#7c3aed;background:#faf5ff;}
+  .opt.correct{background:#dcfce7;border-color:#22c55e;}
+  .opt.wrong{background:#fee2e2;border-color:#ef4444;}
+  .opt:disabled{cursor:default;}
+  .fb{margin-top:8px;padding:10px;border-radius:10px;font-size:.95em;display:none;align-items:center;gap:10px;}
+  .fb.show{display:flex;}
+  .fb.good{background:#dcfce7;color:#166534;} .fb.bad{background:#fee2e2;color:#991b1b;}
+  .spk{background:#0ea5e9;border:none;color:#fff;border-radius:50%;width:34px;height:34px;font-size:1em;cursor:pointer;flex-shrink:0;}
+  .spk:hover{background:#0284c7;}
+  .result{background:#fff;border-radius:24px;padding:26px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none;}
+  .result .big{font-size:3em;margin:10px 0;}
+  .result h2{color:#7c3aed;font-size:1.5em;}
+  .result .sc{font-size:1.3em;font-weight:bold;color:#0e7490;margin:8px 0;}
+  .btn{display:inline-block;margin:8px 6px;background:#7c3aed;color:#fff;text-decoration:none;border:none;padding:12px 18px;border-radius:16px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:1em;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:6px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#be185d;color:#fff;padding:12px;border-radius:16px;font-weight:bold;}
+  .navbtns a.alt{background:#7c3aed;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>🎯 Quiz Rápido</h1>
+    <p>Unit 3 — Animals • 10 perguntas curtinhas!</p>
+    <a class="back" href="index.html">⬅ Voltar ao início</a>
+  </div>
+
+  <div class="hud">
+    <span>📝 <span id="ansC">0</span>/10</span>
+    <span class="ok">✅ <span id="okC">0</span></span>
+    <span class="no">❌ <span id="noC">0</span></span>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="result" id="result">
+    <div class="big" id="emoji">🎉</div>
+    <h2 id="msg">Muito bem!</h2>
+    <div class="sc" id="sc"></div>
+    <button class="btn" onclick="restart()">🔄 Jogar de novo</button>
+    <a class="btn" href="simulado_ingles_5ano.html">Ir para o Simulado ➡</a>
+  </div>
+
+  <div class="navbtns">
+    <a href="leitura_guiada_ingles_5ano.html">⬅ Leitura</a>
+    <a class="alt" href="simulado_ingles_5ano.html">Simulado ➡</a>
+  </div>
+</div>
+
+<script>
+function speak(t){if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=1;window.speechSynthesis.speak(u);}
+
+const questions=[
+ {q:'Qual é "tubarão" em inglês?',o:['whale','shark','seal'],a:1,say:'shark',e:'Shark = tubarão.'},
+ {q:'Complete: The bear is ____ than the ant.',o:['bigger','biggest','more big'],a:0,say:'The bear is bigger than the ant.',e:'"Big" é curto → bigger + than.'},
+ {q:'Complete: The butterfly is the most ____.',o:['beautifulest','beautiful','beautifuler'],a:1,say:'The butterfly is the most beautiful.',e:'"the most" + adjetivo, sem mudar o final.'},
+ {q:'"Eagle" pertence a qual grupo?',o:['Fish','Bird','Reptile'],a:1,say:'The eagle is a bird.',e:'Eagle = águia, é uma ave (Bird).'},
+ {q:'Complete: The seahorse is the ____.',o:['smaller','smallest','most small'],a:1,say:'The seahorse is the smallest.',e:'"small" é curto → the smallest.'},
+ {q:'Qual palavra significa "perigoso"?',o:['beautiful','colorful','dangerous'],a:2,say:'dangerous',e:'Dangerous = perigoso.'},
+ {q:'Complete: The shark is more ____ than the crab.',o:['dangerous','dangerouser','dangerousest'],a:0,say:'The shark is more dangerous than the crab.',e:'Adjetivo longo usa "more ... than".'},
+ {q:'"Bear" significa...',o:['abelha','urso','besouro'],a:1,say:'bear',e:'Bear = urso.'},
+ {q:'Qual frase é um superlativo (o mais de TODOS)?',o:['The whale is bigger than the seal.','The whale is the biggest.','The whale is big.'],a:1,say:'The whale is the biggest.',e:'"the biggest" = superlativo.'},
+ {q:'O "lizard" é um...',o:['Mammal','Reptile','Bird'],a:1,say:'The lizard is a reptile.',e:'Lizard = lagarto, é réptil (Reptile).'}
+];
+
+let answered=0, ok=0, no=0;
+const cont=document.getElementById('quiz');
+
+function render(){
+  cont.innerHTML='';
+  answered=0;ok=0;no=0;
+  document.getElementById('result').style.display='none';
+  updateHud();
+  questions.forEach((q,i)=>{
+    let opts='';
+    q.o.forEach((o,oi)=>opts+=`<button class="opt" onclick="answer(${i},${oi},this)">${o}</button>`);
+    const div=document.createElement('div');
+    div.className='card';
+    div.id='card'+i;
+    div.innerHTML=`<div class="qt"><span class="qnum">${i+1}</span>${q.q}</div>${opts}
+      <div class="fb" id="fb${i}"></div>`;
+    cont.appendChild(div);
+  });
+}
+
+function answer(i,oi,btn){
+  const card=document.getElementById('card'+i);
+  if(card.dataset.done)return;
+  card.dataset.done='1';
+  const q=questions[i];
+  const opts=card.querySelectorAll('.opt');
+  opts.forEach((o,k)=>{o.disabled=true; if(k===q.a)o.classList.add('correct');});
+  const fb=document.getElementById('fb'+i);
+  if(oi===q.a){ok++; fb.className='fb show good'; fb.innerHTML=`<span>✅ Certo! ${q.e}</span><button class="spk" onclick="speak('${q.say}')">🔊</button>`;}
+  else{no++; btn.classList.add('wrong'); fb.className='fb show bad'; fb.innerHTML=`<span>❌ A resposta certa está em verde. ${q.e}</span><button class="spk" onclick="speak('${q.say}')">🔊</button>`;}
+  answered++;
+  updateHud();
+  if(answered===questions.length) finish();
+}
+
+function updateHud(){
+  document.getElementById('ansC').textContent=answered;
+  document.getElementById('okC').textContent=ok;
+  document.getElementById('noC').textContent=no;
+}
+
+function finish(){
+  const r=document.getElementById('result');
+  const pct=Math.round(ok/questions.length*100);
+  let emoji='🌟',msg='Muito bem!';
+  if(pct===100){emoji='🏆';msg='PERFEITO! Você é um expert!';}
+  else if(pct>=70){emoji='🎉';msg='Muito bem! Quase tudo certo!';}
+  else if(pct>=50){emoji='💪';msg='Bom! Revise e tente de novo!';}
+  else{emoji='📚';msg='Vamos revisar o resumo e tentar de novo!';}
+  document.getElementById('emoji').textContent=emoji;
+  document.getElementById('msg').textContent=msg;
+  document.getElementById('sc').textContent=`Você acertou ${ok} de ${questions.length} (${pct}%)`;
+  r.style.display='block';
+  r.scrollIntoView({behavior:'smooth'});
+}
+
+function restart(){window.speechSynthesis&&window.speechSynthesis.cancel();render();window.scrollTo({top:0,behavior:'smooth'});}
+render();
+</script>
+</body>
+</html>

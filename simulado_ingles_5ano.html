@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado 📝 — Unit 3 Animals</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,#6d28d9,#0e7490);min-height:100vh;color:#0f172a;padding:16px;}
+  .wrap{max-width:680px;margin:0 auto;}
+  .top{background:#fff;border-radius:24px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);margin-bottom:14px;}
+  .top h1{color:#6d28d9;font-size:1.6em;}
+  .top p{color:#64748b;margin-top:6px;}
+  .back{display:inline-block;margin-top:10px;background:#6d28d9;color:#fff;text-decoration:none;padding:8px 16px;border-radius:14px;font-size:.9em;}
+  .hud{background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(0,0,0,.2);margin-bottom:14px;}
+  .barbg{background:#e2e8f0;border-radius:20px;height:16px;overflow:hidden;}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#06b6d4);transition:width .4s;border-radius:20px;}
+  .hudrow{display:flex;justify-content:space-between;margin-top:8px;font-weight:bold;color:#334155;font-size:.95em;}
+  .card{background:#fff;border-radius:20px;padding:22px 18px;box-shadow:0 8px 22px rgba(0,0,0,.15);min-height:240px;}
+  .qnum{display:inline-block;background:#6d28d9;color:#fff;border-radius:14px;padding:4px 12px;font-weight:bold;font-size:.9em;margin-bottom:10px;}
+  .qt{font-size:1.2em;font-weight:bold;margin-bottom:16px;line-height:1.4;}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #cbd5e1;border-radius:12px;padding:12px 14px;margin:8px 0;cursor:pointer;font-size:1.05em;font-family:inherit;transition:.15s;}
+  .opt:hover{border-color:#6d28d9;background:#f5f3ff;}
+  .opt.correct{background:#dcfce7;border-color:#22c55e;}
+  .opt.wrong{background:#fee2e2;border-color:#ef4444;}
+  .opt:disabled{cursor:default;}
+  .fb{margin-top:12px;padding:12px;border-radius:12px;font-size:.97em;display:none;align-items:center;gap:10px;}
+  .fb.show{display:flex;}
+  .fb.good{background:#dcfce7;color:#166534;} .fb.bad{background:#fee2e2;color:#991b1b;}
+  .spk{background:#0ea5e9;border:none;color:#fff;border-radius:50%;width:34px;height:34px;font-size:1em;cursor:pointer;flex-shrink:0;}
+  .spk:hover{background:#0284c7;}
+  .next{display:block;width:100%;margin-top:16px;background:#6d28d9;color:#fff;border:none;padding:14px;border-radius:16px;font-weight:bold;font-size:1.05em;cursor:pointer;font-family:inherit;opacity:.5;pointer-events:none;}
+  .next.on{opacity:1;pointer-events:auto;}
+  .next:hover{background:#5b21b6;}
+  .result{background:#fff;border-radius:24px;padding:28px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none;}
+  .result .big{font-size:3em;margin:6px 0;}
+  .result h2{color:#6d28d9;font-size:1.5em;}
+  .result .sc{font-size:1.4em;font-weight:bold;color:#0e7490;margin:10px 0;}
+  .ring{font-size:1.1em;color:#475569;margin:6px 0;}
+  .btn{display:inline-block;margin:8px 6px;background:#6d28d9;color:#fff;text-decoration:none;border:none;padding:12px 18px;border-radius:16px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:1em;}
+  .btn.alt{background:#0e7490;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>📝 Simulado Completo</h1>
+    <p>Unit 3 — Animals • 25 questões estilo prova</p>
+    <a class="back" href="index.html">⬅ Voltar ao início</a>
+  </div>
+
+  <div class="hud" id="hud">
+    <div class="barbg"><div class="bar" id="bar"></div></div>
+    <div class="hudrow">
+      <span id="prog">Questão 1 de 25</span>
+      <span>✅ <span id="score">0</span></span>
+    </div>
+  </div>
+
+  <div class="card" id="card"></div>
+
+  <div class="result" id="result">
+    <div class="big" id="emoji">🎉</div>
+    <h2 id="msg">Simulado concluído!</h2>
+    <div class="sc" id="sc"></div>
+    <div class="ring" id="ring"></div>
+    <button class="btn" onclick="restart()">🔄 Refazer</button>
+    <a class="btn alt" href="gabarito_ingles_5ano.html">Ver Gabarito Comentado ➡</a>
+  </div>
+</div>
+
+<script>
+function speak(t){if(!('speechSynthesis'in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=1;window.speechSynthesis.speak(u);}
+
+const Q=[
+ {q:'The whale is ____ than the seal.',o:['bigger','biggest','more big'],a:0,say:'The whale is bigger than the seal.',e:'"Big" é curto → bigger + than.'},
+ {q:'The seahorse is the ____ of all.',o:['smaller','smallest','most small'],a:1,say:'The seahorse is the smallest of all.',e:'Superlativo curto: small → the smallest.'},
+ {q:'The shark is ____ than the crab.',o:['more dangerous','dangerouser','most dangerous'],a:0,say:'The shark is more dangerous than the crab.',e:'Adjetivo longo: more dangerous + than.'},
+ {q:'The butterfly is the most ____.',o:['beautifulest','beautiful','beautifuller'],a:1,say:'The butterfly is the most beautiful.',e:'"the most" + adjetivo sem mudar o final.'},
+ {q:'Which animal is a Bird?',o:['eagle','shark','bear'],a:0,say:'The eagle is a bird.',e:'Eagle = águia, é uma ave.'},
+ {q:'The bear is ____ than the orangutan.',o:['bigger','biggest','more big'],a:0,say:'The bear is bigger than the orangutan.',e:'Curto → bigger + than.'},
+ {q:'The parrot is ____ than the eagle.',o:['more colorful','colorfuler','colorfulest'],a:0,say:'The parrot is more colorful than the eagle.',e:'Colorful é longo → more colorful + than.'},
+ {q:'Which word means "snake"?',o:['cobra','formiga','aranha'],a:0,say:'snake',e:'Snake = cobra.'},
+ {q:'The lizard is a ____.',o:['reptile','mammal','bird'],a:0,say:'The lizard is a reptile.',e:'Lizard = lagarto, é réptil.'},
+ {q:'The scorpion is the most ____.',o:['dangerous','dangerousest','dangerouser'],a:0,say:'The scorpion is the most dangerous.',e:'"the most" + dangerous, sem mudar o final.'},
+ {q:'The dolphin is ____ than the seahorse.',o:['faster','fastest','more fast'],a:0,say:'The dolphin is faster than the seahorse.',e:'Curto → faster + than.'},
+ {q:'The mouse is the ____ in the forest.',o:['smallest','smaller','most small'],a:0,say:'The mouse is the smallest in the forest.',e:'Superlativo curto: the smallest.'},
+ {q:'Qual frase está CORRETA?',o:['The bear is more bigger than the ant.','The bear is bigger than the ant.','The bear is biggest than the ant.'],a:1,say:'The bear is bigger than the ant.',e:'Só "bigger than" está certo. Não se mistura more + -er.'},
+ {q:'Which word means "spider"?',o:['aranha','besouro','rato'],a:0,say:'spider',e:'Spider = aranha.'},
+ {q:'The snake is ____ than the lizard.',o:['longer','longest','more long'],a:0,say:'The snake is longer than the lizard.',e:'Curto → longer + than.'},
+ {q:'The shark is the ____ of all.',o:['meanest','meaner','most mean'],a:0,say:'The shark is the meanest of all.',e:'Superlativo curto: mean → the meanest.'},
+ {q:'Which animal is a Mammal?',o:['whale','shark','lizard'],a:0,say:'The whale is a mammal.',e:'Whale = baleia, é mamífero.'},
+ {q:'The orangutan is the ____ in the forest.',o:['biggest','bigger','most big'],a:0,say:'The orangutan is the biggest in the forest.',e:'Superlativo curto: the biggest.'},
+ {q:'The crab is the ____ of all.',o:['hungriest','hungrier','most hungry'],a:0,say:'The crab is the hungriest of all.',e:'Termina em -y → the hungriest.'},
+ {q:'The spider is ____ than the ant.',o:['more dangerous','dangerousest','dangerouser'],a:0,say:'The spider is more dangerous than the ant.',e:'Longo → more dangerous + than.'},
+ {q:'Qual frase é um COMPARATIVO (compara DOIS)?',o:['The whale is the biggest.','The shark is bigger than the seal.','The eagle is the most beautiful.'],a:1,say:'The shark is bigger than the seal.',e:'Tem "than" comparando dois = comparativo.'},
+ {q:'Which word means "beetle"?',o:['besouro','borboleta','abelha'],a:0,say:'beetle',e:'Beetle = besouro.'},
+ {q:'The parrot is the most ____.',o:['colorful','colorfulest','colorfuller'],a:0,say:'The parrot is the most colorful.',e:'"the most" + colorful, sem mudar o final.'},
+ {q:'The eagle is ____ than the lizard.',o:['more beautiful','beautifuler','beautifulest'],a:0,say:'The eagle is more beautiful than the lizard.',e:'Longo → more beautiful + than.'},
+ {q:'The whale is the ____ animal of all.',o:['biggest','bigger','more big'],a:0,say:'The whale is the biggest animal of all.',e:'Superlativo curto: the biggest.'}
+];
+
+let idx=0, score=0, locked=false;
+const card=document.getElementById('card');
+
+function show(){
+  locked=false;
+  const item=Q[idx];
+  let opts='';
+  item.o.forEach((o,oi)=>opts+=`<button class="opt" onclick="answer(${oi},this)">${o}</button>`);
+  card.innerHTML=`<div class="qnum">Questão ${idx+1} de ${Q.length}</div>
+    <div class="qt">${item.q}</div>${opts}
+    <div class="fb" id="fb"></div>
+    <button class="next" id="next" onclick="nextQ()">Próxima ➡</button>`;
+  document.getElementById('bar').style.width=(idx/Q.length*100)+'%';
+  document.getElementById('prog').textContent='Questão '+(idx+1)+' de '+Q.length;
+}
+
+function answer(oi,btn){
+  if(locked)return; locked=true;
+  const item=Q[idx];
+  const opts=card.querySelectorAll('.opt');
+  opts.forEach((o,k)=>{o.disabled=true; if(k===item.a)o.classList.add('correct');});
+  const fb=document.getElementById('fb');
+  if(oi===item.a){score++; fb.className='fb show good'; fb.innerHTML=`<span>✅ Correto! ${item.e}</span><button class="spk" onclick="speak('${item.say.replace(/'/g,"\\'")}')">🔊</button>`;}
+  else{btn.classList.add('wrong'); fb.className='fb show bad'; fb.innerHTML=`<span>❌ A correta está em verde. ${item.e}</span><button class="spk" onclick="speak('${item.say.replace(/'/g,"\\'")}')">🔊</button>`;}
+  document.getElementById('score').textContent=score;
+  const nx=document.getElementById('next'); nx.classList.add('on');
+  nx.textContent = (idx===Q.length-1)?'Ver resultado 🏁':'Próxima ➡';
+}
+
+function nextQ(){
+  if(idx<Q.length-1){idx++; show(); window.scrollTo({top:0,behavior:'smooth'});}
+  else finish();
+}
+
+function finish(){
+  document.getElementById('hud').style.display='none';
+  card.style.display='none';
+  const pct=Math.round(score/Q.length*100);
+  let emoji='🌟',msg='Bom trabalho!';
+  if(pct>=90){emoji='🏆';msg='Incrível! Você está pronta para a prova!';}
+  else if(pct>=70){emoji='🎉';msg='Muito bem! Já sabe quase tudo!';}
+  else if(pct>=50){emoji='💪';msg='Bom! Revise os erros no gabarito.';}
+  else{emoji='📚';msg='Vamos revisar o resumo e tentar de novo!';}
+  document.getElementById('emoji').textContent=emoji;
+  document.getElementById('msg').textContent=msg;
+  document.getElementById('sc').textContent=`${score} de ${Q.length} acertos (${pct}%)`;
+  document.getElementById('ring').textContent='Veja o gabarito para entender cada questão. 👇';
+  document.getElementById('result').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function restart(){idx=0;score=0;document.getElementById('result').style.display='none';document.getElementById('hud').style.display='block';card.style.display='block';document.getElementById('score').textContent='0';show();window.scrollTo({top:0,behavior:'smooth'});}
+show();
+</script>
+</body>
+</html>

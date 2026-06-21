@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo com Áudio 📖 — Unit 3 Animals</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,#0e7490,#22c55e);min-height:100vh;color:#0f172a;padding:16px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  .top{background:#fff;border-radius:24px;padding:20px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);margin-bottom:18px;}
+  .top h1{color:#0e7490;font-size:1.6em;}
+  .top p{color:#64748b;margin-top:6px;}
+  .back{display:inline-block;margin-top:12px;background:#0e7490;color:#fff;text-decoration:none;padding:8px 16px;border-radius:14px;font-size:.9em;}
+  .section{background:#fff;border-radius:22px;padding:18px 16px;margin-bottom:18px;box-shadow:0 8px 22px rgba(0,0,0,.15);}
+  .section h2{font-size:1.3em;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .section .lead{color:#64748b;margin-bottom:14px;font-size:.97em;}
+  .s1 h2{color:#2563eb;} .s2 h2{color:#16a34a;} .s3 h2{color:#d97706;} .s4 h2{color:#db2777;} .s5 h2{color:#7c3aed;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+  .voc{background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;padding:12px;text-align:center;position:relative;}
+  .voc .en{font-size:1.15em;font-weight:bold;color:#0f172a;}
+  .voc .pt{color:#64748b;font-size:.92em;margin-top:2px;}
+  .voc .gender{font-size:.85em;color:#475569;margin-top:3px;}
+  .spk{margin-top:8px;background:#0ea5e9;border:none;color:#fff;border-radius:50%;width:38px;height:38px;font-size:1.1em;cursor:pointer;box-shadow:0 3px 8px rgba(14,165,233,.4);}
+  .spk:hover{background:#0284c7;transform:scale(1.08);}
+  .spk:active{transform:scale(.95);}
+  table{width:100%;border-collapse:collapse;margin-top:6px;background:#fff;border-radius:12px;overflow:hidden;}
+  th{background:#0e7490;color:#fff;padding:10px;font-size:.95em;}
+  td{padding:10px;border-bottom:1px solid #e2e8f0;font-size:.95em;vertical-align:middle;}
+  tr:nth-child(even) td{background:#f1f5f9;}
+  .ex{background:#ecfeff;border-left:6px solid #06b6d4;border-radius:10px;padding:10px 12px;margin:8px 0;}
+  .ex b{color:#0e7490;}
+  .rowspk{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .miniSpk{background:#22c55e;border:none;color:#fff;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9em;}
+  .miniSpk:hover{background:#16a34a;}
+  .rule{background:#fef9c3;border:2px dashed #eab308;border-radius:14px;padding:12px 14px;margin-top:10px;}
+  .rule b{color:#a16207;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:10px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#0e7490;color:#fff;padding:12px;border-radius:16px;font-weight:bold;}
+  .navbtns a.alt{background:#db2777;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>📖 Resumo com Áudio</h1>
+    <p>Unit 3 — Animals • Clique no 🔊 para ouvir em inglês!</p>
+    <a class="back" href="index.html">⬅ Voltar ao início</a>
+  </div>
+
+  <!-- BLOCO 1: animais do mar -->
+  <div class="section s1">
+    <h2>🌊 Sea animals (animais do mar)</h2>
+    <p class="lead">Toque no 🔊 e repita em voz alta.</p>
+    <div class="grid" id="sea"></div>
+  </div>
+
+  <!-- BLOCO 2: animais da floresta -->
+  <div class="section s2">
+    <h2>🌳 Wild animals (animais selvagens)</h2>
+    <p class="lead">Estes aparecem muito nas comparações!</p>
+    <div class="grid" id="wild"></div>
+  </div>
+
+  <!-- BLOCO 3: adjetivos -->
+  <div class="section s3">
+    <h2>✨ Adjectives (adjetivos)</h2>
+    <p class="lead">Palavras para descrever e comparar os animais.</p>
+    <div class="grid" id="adj"></div>
+  </div>
+
+  <!-- BLOCO 4: comparativos -->
+  <div class="section s4">
+    <h2>⚖️ Comparativo (comparar 2 animais)</h2>
+    <p class="lead">Usamos para dizer que UM é MAIS que o OUTRO. A palavra mágica é <b>than</b> (= do que).</p>
+    <table>
+      <tr><th>Tipo de adjetivo</th><th>Regra</th><th>Exemplo</th></tr>
+      <tr><td><b>Curto</b><br>(1 ou 2 sílabas)</td><td>adjetivo + <b>-er</b> + than</td><td>big → bigg<b>er</b> than</td></tr>
+      <tr><td><b>Curto terminado em -y</b></td><td>troca -y por <b>-ier</b> + than</td><td>hungry → hungr<b>ier</b> than</td></tr>
+      <tr><td><b>Longo</b><br>(3+ sílabas)</td><td><b>more</b> + adjetivo + than</td><td><b>more</b> dangerous than</td></tr>
+    </table>
+    <div class="ex rowspk"><span><b>The bear is bigger than the lizard.</b><br>O urso é maior do que o lagarto.</span><button class="miniSpk" onclick="speak('The bear is bigger than the lizard.')">🔊</button></div>
+    <div class="ex rowspk"><span><b>The shark is more dangerous than the seahorse.</b><br>O tubarão é mais perigoso do que o cavalo-marinho.</span><button class="miniSpk" onclick="speak('The shark is more dangerous than the seahorse.')">🔊</button></div>
+    <div class="ex rowspk"><span><b>The eagle is more beautiful than the scorpion.</b><br>A águia é mais bonita do que o escorpião.</span><button class="miniSpk" onclick="speak('The eagle is more beautiful than the scorpion.')">🔊</button></div>
+  </div>
+
+  <!-- BLOCO 5: superlativos -->
+  <div class="section s5">
+    <h2>👑 Superlativo (o MAIS de todos)</h2>
+    <p class="lead">Usamos para dizer que UM é o campeão entre TODOS. Sempre começa com <b>the</b>.</p>
+    <table>
+      <tr><th>Tipo de adjetivo</th><th>Regra</th><th>Exemplo</th></tr>
+      <tr><td><b>Curto</b><br>(1 sílaba)</td><td>the + adjetivo + <b>-est</b></td><td>big → the bigg<b>est</b></td></tr>
+      <tr><td><b>Curto terminado em -y</b></td><td>the + adjetivo, -y vira <b>-iest</b></td><td>hungry → the hungr<b>iest</b></td></tr>
+      <tr><td><b>Longo</b><br>(3+ sílabas)</td><td><b>the most</b> + adjetivo</td><td><b>the most</b> dangerous</td></tr>
+    </table>
+    <div class="rule">💡 <b>Regra do livro:</b> usamos <b>the most</b> com adjetivos de 3 ou mais sílabas. Usamos <b>-est</b> com adjetivos de 1 sílaba e com os de 2 sílabas terminados em <b>-y</b>.</div>
+    <div class="ex rowspk"><span><b>The whale is the biggest.</b><br>A baleia é a maior de todas.</span><button class="miniSpk" onclick="speak('The whale is the biggest.')">🔊</button></div>
+    <div class="ex rowspk"><span><b>The seahorse is the smallest.</b><br>O cavalo-marinho é o menor de todos.</span><button class="miniSpk" onclick="speak('The seahorse is the smallest.')">🔊</button></div>
+    <div class="ex rowspk"><span><b>The butterfly is the most beautiful.</b><br>A borboleta é a mais bonita de todas.</span><button class="miniSpk" onclick="speak('The butterfly is the most beautiful.')">🔊</button></div>
+    <div class="ex rowspk"><span><b>The scorpion is the most dangerous.</b><br>O escorpião é o mais perigoso de todos.</span><button class="miniSpk" onclick="speak('The scorpion is the most dangerous.')">🔊</button></div>
+  </div>
+
+  <!-- BLOCO 6: classificar -->
+  <div class="section s1">
+    <h2>🗂️ Classificar os animais</h2>
+    <p class="lead">Na prova pode pedir para colocar cada animal no grupo certo.</p>
+    <table>
+      <tr><th>Birds 🐦<br>(aves)</th><th>Fish 🐟<br>(peixes)</th><th>Mammals 🐻<br>(mamíferos)</th><th>Reptiles 🦎<br>(répteis)</th></tr>
+      <tr><td>eagle, parrot</td><td>shark</td><td>seal, whale, dolphin, bear, orangutan</td><td>lizard, snake</td></tr>
+    </table>
+  </div>
+
+  <div class="navbtns">
+    <a href="index.html">🏠 Início</a>
+    <a class="alt" href="leitura_guiada_ingles_5ano.html">Leitura Guiada ➡</a>
+  </div>
+</div>
+
+<script>
+function speak(text,lang='en-US',rate=1){
+  if(!('speechSynthesis' in window)){alert('Seu navegador não tem áudio. Tente o Chrome ou Safari.');return;}
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang; u.rate=rate;
+  window.speechSynthesis.speak(u);
+}
+
+const sea=[
+  ['dolphin','golfinho'],['whale','baleia'],['seal','foca'],
+  ['seahorse','cavalo-marinho'],['shark','tubarão'],['crab','caranguejo']
+];
+const wild=[
+  ['eagle','águia'],['lizard','lagarto'],['parrot','papagaio'],
+  ['orangutan','orangotango'],['scorpion','escorpião'],['bear','urso'],
+  ['butterfly','borboleta'],['spider','aranha'],['beetle','besouro'],
+  ['snake','cobra'],['mouse','rato'],['ant','formiga']
+];
+const adj=[
+  ['big','grande'],['small','pequeno'],['long','comprido'],
+  ['beautiful','bonito'],['colorful','colorido'],['dangerous','perigoso'],
+  ['mean','malvado'],['hungry','faminto'],['dirty','sujo'],
+  ['clean','limpo'],['kind','gentil'],['old','velho'],
+  ['tall','alto'],['fast','rápido'],['slow','lento'],
+  ['delicious','delicioso'],['disgusting','nojento'],['rich','rico']
+];
+
+function card(en,pt){
+  return `<div class="voc">
+    <div class="en">${en}</div>
+    <div class="pt">${pt}</div>
+    <button class="spk" onclick="speak('${en}')">🔊</button>
+  </div>`;
+}
+document.getElementById('sea').innerHTML  = sea.map(w=>card(w[0],w[1])).join('');
+document.getElementById('wild').innerHTML = wild.map(w=>card(w[0],w[1])).join('');
+document.getElementById('adj').innerHTML  = adj.map(w=>card(w[0],w[1])).join('');
+</script>
+</body>
+</html>

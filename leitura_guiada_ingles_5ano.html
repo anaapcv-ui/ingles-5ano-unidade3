@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leitura Guiada 🧭 — Unit 3 Animals</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,#15803d,#0e7490);min-height:100vh;color:#0f172a;padding:16px;}
+  .wrap{max-width:820px;margin:0 auto;}
+  .top{background:#fff;border-radius:24px;padding:18px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.2);margin-bottom:14px;}
+  .top h1{color:#15803d;font-size:1.6em;}
+  .top p{color:#64748b;margin-top:6px;}
+  .back{display:inline-block;margin-top:10px;background:#15803d;color:#fff;text-decoration:none;padding:8px 16px;border-radius:14px;font-size:.9em;}
+  .hud{position:sticky;top:6px;z-index:30;background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 6px 18px rgba(0,0,0,.2);margin-bottom:16px;}
+  .barbg{background:#e2e8f0;border-radius:20px;height:18px;overflow:hidden;}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#0ea5e9);transition:width .4s;border-radius:20px;}
+  .hudrow{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-weight:bold;color:#334155;font-size:.95em;}
+  .stars{color:#f59e0b;}
+  .block{background:#fff;border-radius:22px;margin-bottom:16px;box-shadow:0 8px 22px rgba(0,0,0,.15);overflow:hidden;border-top:8px solid #ccc;}
+  .b1{border-color:#3b82f6;} .b2{border-color:#22c55e;} .b3{border-color:#f59e0b;} .b4{border-color:#ec4899;} .b5{border-color:#8b5cf6;} .bR{border-color:#ef4444;}
+  .bhead{padding:16px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;user-select:none;}
+  .bhead .em{font-size:1.8em;}
+  .bhead h2{font-size:1.2em;flex:1;}
+  .bhead .arrow{font-size:1.3em;color:#94a3b8;transition:transform .3s;}
+  .block.open .arrow{transform:rotate(180deg);}
+  .bbody{display:none;padding:0 18px 18px;}
+  .block.open .bbody{display:block;animation:fade .35s;}
+  @keyframes fade{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+  .text{font-size:1.05em;line-height:1.6;color:#1e293b;margin:6px 0 12px;}
+  .text b{color:#0e7490;}
+  .concept{background:#fef9c3;border:2px dashed #eab308;border-radius:14px;padding:12px 14px;margin:12px 0;}
+  .concept h4{color:#a16207;margin-bottom:6px;}
+  .concept ul{margin-left:18px;}
+  .concept li{margin:3px 0;}
+  .q{background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;padding:14px;margin:12px 0;}
+  .q .qt{font-weight:bold;margin-bottom:10px;}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #cbd5e1;border-radius:12px;padding:11px 14px;margin:7px 0;cursor:pointer;font-size:1em;font-family:inherit;transition:.15s;}
+  .opt:hover{border-color:#0ea5e9;background:#f0f9ff;}
+  .opt.correct{background:#dcfce7;border-color:#22c55e;}
+  .opt.wrong{background:#fee2e2;border-color:#ef4444;}
+  .opt:disabled{cursor:default;}
+  .fb{margin-top:8px;padding:10px;border-radius:10px;font-size:.95em;display:none;}
+  .fb.ok{display:block;background:#dcfce7;color:#166534;}
+  .fb.no{display:block;background:#fee2e2;color:#991b1b;}
+  .navbtns{display:flex;justify-content:space-between;gap:10px;margin-top:10px;}
+  .navbtns a{flex:1;text-align:center;text-decoration:none;background:#15803d;color:#fff;padding:12px;border-radius:16px;font-weight:bold;}
+  .navbtns a.alt{background:#db2777;}
+  .done{background:#fff;border-radius:22px;padding:22px;text-align:center;box-shadow:0 8px 22px rgba(0,0,0,.2);display:none;}
+  .done h2{color:#15803d;font-size:1.5em;}
+  .done .big{font-size:2.4em;margin:10px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>🧭 Leitura Guiada</h1>
+    <p>Unit 3 — Animals • Leia cada bloco e responda as perguntinhas!</p>
+    <a class="back" href="index.html">⬅ Voltar ao início</a>
+  </div>
+
+  <div class="hud">
+    <div class="barbg"><div class="bar" id="bar"></div></div>
+    <div class="hudrow">
+      <span id="prog">0 / 18 respondidas</span>
+      <span class="stars" id="stars">⭐ 0</span>
+    </div>
+  </div>
+
+  <div id="blocks"></div>
+
+  <div class="done" id="done">
+    <h2>🎉 Parabéns!</h2>
+    <div class="big">🦅🌟🐬</div>
+    <p>Você terminou a leitura guiada da Unit 3!</p>
+    <p id="finalScore" style="margin-top:8px;font-weight:bold;color:#0e7490;"></p>
+  </div>
+
+  <div class="navbtns">
+    <a href="resumo_ingles_5ano.html">⬅ Resumo</a>
+    <a class="alt" href="quiz_ingles_5ano.html">Ir para o Quiz ➡</a>
+  </div>
+</div>
+
+<script>
+const blocks=[
+ {cls:'b1',em:'🌊',title:'Bloco 1 — Os animais do mar',
+  text:'Na Unit 3 conhecemos vários <b>sea animals</b> (animais do mar): <b>dolphins</b> (golfinhos), <b>whales</b> (baleias), <b>seals</b> (focas), <b>seahorses</b> (cavalos-marinhos), <b>sharks</b> (tubarões) e <b>crabs</b> (caranguejos). Cada um tem um tamanho e um jeito diferente. A baleia é enorme, e o cavalo-marinho é pequenininho!',
+  concept:{h:'Palavras importantes',items:['<b>whale</b> = baleia (a maior!)','<b>seahorse</b> = cavalo-marinho (o menor!)','<b>shark</b> = tubarão','<b>crab</b> = caranguejo']},
+  qs:[
+   {q:'Qual palavra significa "baleia"?',o:['seahorse','whale','crab'],a:1,e:'Whale = baleia, o maior animal do mar da unidade.'},
+   {q:'O cavalo-marinho em inglês é...',o:['seahorse','seal','shark'],a:0,e:'Seahorse = cavalo-marinho (sea = mar + horse = cavalo).'},
+   {q:'"Shark" é o nome de qual animal?',o:['foca','tubarão','golfinho'],a:1,e:'Shark = tubarão, conhecido por ser perigoso.'}
+  ]},
+
+ {cls:'b2',em:'🌳',title:'Bloco 2 — Os animais selvagens',
+  text:'Também aprendemos os <b>wild animals</b> (animais selvagens): <b>eagle</b> (águia), <b>lizard</b> (lagarto), <b>parrot</b> (papagaio), <b>orangutan</b> (orangotango), <b>scorpion</b> (escorpião) e <b>bear</b> (urso). E ainda os pequenininhos: <b>butterfly</b> (borboleta), <b>spider</b> (aranha), <b>beetle</b> (besouro), <b>snake</b> (cobra), <b>mouse</b> (rato) e <b>ant</b> (formiga).',
+  concept:{h:'Palavras importantes',items:['<b>eagle</b> = águia','<b>bear</b> = urso (grande e perigoso)','<b>scorpion</b> = escorpião','<b>butterfly</b> = borboleta (a mais bonita)']},
+  qs:[
+   {q:'"Bear" significa...',o:['abelha','urso','pássaro'],a:1,e:'Bear = urso. Cuidado para não confundir com "bee" (abelha)!'},
+   {q:'Qual destes é a borboleta?',o:['butterfly','beetle','spider'],a:0,e:'Butterfly = borboleta. Beetle = besouro e spider = aranha.'},
+   {q:'"Scorpion" é o...',o:['escorpião','papagaio','lagarto'],a:0,e:'Scorpion = escorpião, o animal mais perigoso da história.'}
+  ]},
+
+ {cls:'b3',em:'⚖️',title:'Bloco 3 — Comparativo: comparar DOIS animais',
+  text:'Quando comparamos <b>dois</b> animais, dizemos que um é MAIS que o outro. A palavra mágica é <b>than</b> (= do que). Se o adjetivo é <b>curto</b>, acrescentamos <b>-er</b>: big → <b>bigger</b> than. Se o adjetivo é <b>longo</b> (3 sílabas ou mais), usamos <b>more</b> na frente: <b>more</b> dangerous than.',
+  concept:{h:'Como montar a frase',items:['Curto: The bear is <b>bigger than</b> the lizard.','Longo: The shark is <b>more dangerous than</b> the seahorse.','Termina em -y: hungry → <b>hungrier than</b>','Nunca use "more" + "-er" juntos!']},
+  qs:[
+   {q:'Complete: The whale is ____ than the seal.',o:['biggest','bigger','more big'],a:1,e:'"Big" é curto, então vira "bigger" + than. Nunca "more big".'},
+   {q:'Complete: The shark is ____ than the crab.',o:['more dangerous','dangerouser','most dangerous'],a:0,e:'"Dangerous" é longo (3 sílabas), então usamos "more dangerous than".'},
+   {q:'Qual frase está CORRETA?',o:['The bear is more bigger than the ant.','The lizard is smaller than the bear.','The eagle is beautifuler than the bee.'],a:1,e:'"smaller than" está certo. As outras misturam regras erradas.'}
+  ]},
+
+ {cls:'b4',em:'👑',title:'Bloco 4 — Superlativo: o MAIS de todos',
+  text:'Quando um animal é o campeão entre <b>todos</b>, usamos o superlativo. Ele sempre começa com <b>the</b>. Se o adjetivo é <b>curto</b>, acrescentamos <b>-est</b>: big → <b>the biggest</b>. Se é <b>longo</b>, usamos <b>the most</b>: <b>the most</b> beautiful.',
+  concept:{h:'Como montar a frase',items:['Curto: The whale is <b>the biggest</b>.','Curto: The seahorse is <b>the smallest</b>.','Longo: The butterfly is <b>the most beautiful</b>.','Longo: The scorpion is <b>the most dangerous</b>.']},
+  qs:[
+   {q:'Complete: The seahorse is ____.',o:['the smallest','smaller','the most small'],a:0,e:'"Small" é curto → "the smallest". Superlativo sempre com "the".'},
+   {q:'Complete: The butterfly is ____.',o:['the beautifulest','the most beautiful','more beautiful'],a:1,e:'"Beautiful" é longo, então "the most beautiful".'},
+   {q:'Qual frase mostra o superlativo (o mais de TODOS)?',o:['The bear is bigger than the ant.','The whale is the biggest.','The shark is more dangerous than the crab.'],a:1,e:'"the biggest" = superlativo. As outras usam "than" = comparativo.'}
+  ]},
+
+ {cls:'b5',em:'🗂️',title:'Bloco 5 — Classificar os animais',
+  text:'Podemos separar os animais em grupos: <b>Birds</b> (aves, como eagle e parrot), <b>Fish</b> (peixes, como shark), <b>Mammals</b> (mamíferos, como seal, whale, bear e orangutan) e <b>Reptiles</b> (répteis, como lizard e snake).',
+  concept:{h:'Os 4 grupos',items:['<b>Birds</b> 🐦 = aves (eagle, parrot)','<b>Fish</b> 🐟 = peixes (shark)','<b>Mammals</b> 🐻 = mamíferos (seal, whale, bear)','<b>Reptiles</b> 🦎 = répteis (lizard, snake)']},
+  qs:[
+   {q:'A "eagle" (águia) é um...',o:['Fish','Bird','Reptile'],a:1,e:'Eagle = ave (Bird), porque voa e tem penas.'},
+   {q:'O "lizard" (lagarto) faz parte de...',o:['Reptiles','Mammals','Birds'],a:0,e:'Lizard = réptil (Reptile), assim como a cobra.'},
+   {q:'Qual destes é um "Mammal" (mamífero)?',o:['shark','bear','parrot'],a:1,e:'Bear (urso) é mamífero. Shark é peixe e parrot é ave.'}
+  ]},
+
+ {cls:'bR',em:'🏆',title:'Bloco Final — Revisão geral (tudo junto!)',
+  text:'Agora misturamos tudo o que você aprendeu: vocabulário, comparativo, superlativo e grupos de animais. Mostre que você é um expert! 💪',
+  concept:{h:'Lembre-se',items:['Comparativo: -er / more + <b>than</b>','Superlativo: <b>the</b> + -est / <b>the most</b>','Curto = -er / -est • Longo = more / most']},
+  qs:[
+   {q:'The mouse is the ____ animal in the forest. (small)',o:['smaller','smallest','most small'],a:1,e:'"Smallest" porque é o menor de TODOS (superlativo curto).'},
+   {q:'The eagle is ____ than the parrot. (colorful)',o:['more colorful','colorfuler','most colorful'],a:0,e:'"Colorful" é longo → "more colorful than".'},
+   {q:'Qual frase está totalmente correta?',o:['The whale is the most big.','The scorpion is the most dangerous.','The bear is biggest than the ant.'],a:1,e:'"the most dangerous" está perfeito. As outras misturam as regras.'}
+  ]}
+];
+
+let answered=0, stars=0;
+const total=blocks.reduce((s,b)=>s+b.qs.length,0);
+const cont=document.getElementById('blocks');
+
+blocks.forEach((b,bi)=>{
+  const div=document.createElement('div');
+  div.className='block '+b.cls;
+  let qsHtml='';
+  b.qs.forEach((q,qi)=>{
+    let opts='';
+    q.o.forEach((o,oi)=>{
+      opts+=`<button class="opt" onclick="answer(${bi},${qi},${oi},this)">${o}</button>`;
+    });
+    qsHtml+=`<div class="q" id="q${bi}_${qi}"><div class="qt">${qi+1}) ${q.q}</div>${opts}<div class="fb" id="fb${bi}_${qi}"></div></div>`;
+  });
+  let concept='<div class="concept"><h4>📌 '+b.concept.h+'</h4><ul>'+b.concept.items.map(i=>'<li>'+i+'</li>').join('')+'</ul></div>';
+  div.innerHTML=`<div class="bhead" onclick="toggle(this)"><span class="em">${b.em}</span><h2>${b.title}</h2><span class="arrow">▼</span></div>
+    <div class="bbody"><p class="text">${b.text}</p>${concept}${qsHtml}</div>`;
+  cont.appendChild(div);
+});
+// abre o primeiro
+cont.firstChild.classList.add('open');
+
+function toggle(h){ h.parentElement.classList.toggle('open'); }
+
+function answer(bi,qi,oi,btn){
+  const q=blocks[bi].qs[qi];
+  const box=document.getElementById('q'+bi+'_'+qi);
+  if(box.dataset.done) return;
+  box.dataset.done='1';
+  const opts=box.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{ o.disabled=true; if(i===q.a)o.classList.add('correct'); });
+  const fb=document.getElementById('fb'+bi+'_'+qi);
+  if(oi===q.a){ stars++; fb.className='fb ok'; fb.innerHTML='✅ Isso! '+q.e; }
+  else { btn.classList.add('wrong'); fb.className='fb no'; fb.innerHTML='❌ Quase! '+q.e; }
+  answered++;
+  update();
+}
+
+function update(){
+  document.getElementById('bar').style.width=(answered/total*100)+'%';
+  document.getElementById('prog').textContent=answered+' / '+total+' respondidas';
+  document.getElementById('stars').textContent='⭐ '+stars;
+  if(answered===total){
+    const d=document.getElementById('done'); d.style.display='block';
+    document.getElementById('finalScore').textContent='Você ganhou '+stars+' de '+total+' estrelas! 🌟';
+    d.scrollIntoView({behavior:'smooth'});
+  }
+}
+</script>
+</body>
+</html>
