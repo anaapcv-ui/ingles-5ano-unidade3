@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Kit 🦅 Unit 3 — Versão Tranquila</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:Verdana,Tahoma,'Trebuchet MS',sans-serif;
+    background:#fdf3e3;
+    color:#2d2d3a;
+    line-height:1.9;
+    letter-spacing:.4px;
+    word-spacing:2px;
+    padding:14px;
+    font-size:19px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+  /* Cabeçalho */
+  .top{
+    background:#fff;border-radius:22px;padding:20px;text-align:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.12);margin-bottom:16px;
+  }
+  .top h1{font-size:1.5em;color:#0e7490;line-height:1.4;}
+  .top p{font-size:.95em;color:#5b6470;margin-top:8px;}
+  /* Abas grandes */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center;}
+  .tab{
+    flex:1 1 45%;min-height:56px;border:none;border-radius:16px;cursor:pointer;
+    font-family:inherit;font-size:.92em;font-weight:bold;color:#2d2d3a;background:#ffe8c2;
+    padding:10px;box-shadow:0 3px 8px rgba(0,0,0,.1);letter-spacing:.3px;
+  }
+  .tab.active{background:#0e7490;color:#fff;}
+  .panel{display:none;}
+  .panel.active{display:block;animation:soft .4s;}
+  @keyframes soft{from{opacity:0}to{opacity:1}}
+  .card{
+    background:#fff;border-radius:20px;padding:20px;margin-bottom:16px;
+    box-shadow:0 5px 14px rgba(0,0,0,.1);
+  }
+  .card h2{font-size:1.25em;color:#15803d;margin-bottom:6px;line-height:1.4;}
+  .step{
+    background:#eafff3;border-left:7px solid #22c55e;border-radius:12px;
+    padding:14px 16px;margin:14px 0;
+  }
+  .step .num{
+    display:inline-block;background:#22c55e;color:#fff;border-radius:50%;
+    width:34px;height:34px;line-height:34px;text-align:center;font-weight:bold;margin-right:8px;
+  }
+  /* Botão de ouvir */
+  .listen{
+    display:inline-flex;align-items:center;gap:8px;background:#0ea5e9;color:#fff;
+    border:none;border-radius:30px;padding:10px 18px;font-family:inherit;font-size:.85em;
+    font-weight:bold;cursor:pointer;margin-top:8px;box-shadow:0 4px 10px rgba(14,165,233,.4);
+  }
+  .listen:hover{background:#0284c7;}
+  .listen:active{transform:scale(.97);}
+  .listen.big{font-size:1em;padding:14px 22px;}
+  /* Vocabulário fixo */
+  .vgrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:520px){.vgrid{grid-template-columns:1fr 1fr;}}
+  .voc{
+    background:#fff7ea;border:2px solid #f0d9b5;border-radius:16px;padding:14px;
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .voc .word{font-size:1.15em;font-weight:bold;color:#1f2937;}
+  .voc .tr{font-size:.85em;color:#6b7280;}
+  .voc .lbtn{
+    background:#0ea5e9;border:none;color:#fff;border-radius:50%;
+    width:48px;height:48px;font-size:1.2em;cursor:pointer;flex-shrink:0;
+    box-shadow:0 3px 8px rgba(14,165,233,.4);
+  }
+  .voc .lbtn:hover{background:#0284c7;}
+  .example{
+    background:#eef6ff;border-radius:14px;padding:14px;margin:12px 0;
+  }
+  .example .en{font-size:1.1em;font-weight:bold;color:#0e7490;}
+  .example .pt{font-size:.85em;color:#5b6470;margin-top:4px;}
+  /* Treino */
+  .q .ask{font-size:1.1em;font-weight:bold;margin:10px 0 6px;}
+  .opt{
+    display:block;width:100%;text-align:left;background:#fff;border:3px solid #d9c5a0;
+    border-radius:16px;padding:16px;margin:10px 0;cursor:pointer;font-family:inherit;
+    font-size:1.05em;font-weight:bold;color:#2d2d3a;letter-spacing:.3px;
+  }
+  .opt:hover{border-color:#0ea5e9;}
+  .opt.ok{background:#dcfce7;border-color:#22c55e;}
+  .opt.no{background:#ffe4e4;border-color:#f87171;}
+  .opt:disabled{cursor:default;}
+  .fb{display:none;margin-top:12px;padding:14px;border-radius:14px;font-size:.95em;line-height:1.7;}
+  .fb.good{display:block;background:#dcfce7;color:#166534;}
+  .fb.try{display:block;background:#fff3d6;color:#92600a;}
+  .nav{display:flex;gap:10px;margin-top:14px;}
+  .nav button{
+    flex:1;border:none;border-radius:16px;padding:14px;font-family:inherit;font-size:1em;
+    font-weight:bold;cursor:pointer;color:#fff;background:#0e7490;letter-spacing:.3px;
+  }
+  .nav button:disabled{opacity:.4;cursor:default;}
+  .stars{text-align:center;font-size:1.1em;color:#f59e0b;font-weight:bold;margin-top:10px;}
+  .progress{text-align:center;color:#5b6470;font-size:.85em;margin-top:4px;}
+  .done{
+    background:#fff;border-radius:20px;padding:24px;text-align:center;
+    box-shadow:0 5px 14px rgba(0,0,0,.1);display:none;
+  }
+  .done.show{display:block;}
+  .done .big{font-size:2.6em;}
+  .done h2{color:#15803d;font-size:1.3em;margin:6px 0;}
+  .done button{
+    margin-top:14px;border:none;border-radius:16px;padding:14px 22px;font-family:inherit;
+    font-size:1em;font-weight:bold;cursor:pointer;color:#fff;background:#0e7490;
+  }
+  .hint{background:#fdf3e3;border-radius:12px;padding:12px 14px;font-size:.82em;color:#6b7280;margin-top:10px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>🦅 English Kit — Unit 3</h1>
+    <p>Animais e comparações 🐻🐬🦂<br>Versão tranquila: devagar, com som e um passo de cada vez.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab(0,this)">🔊 Palavras</button>
+    <button class="tab" onclick="showTab(1,this)">📏 As 2 regras</button>
+    <button class="tab" onclick="showTab(2,this)">✏️ Treino</button>
+    <button class="tab" onclick="showTab(3,this)">🎮 Joguinho</button>
+  </div>
+
+  <!-- ABA 0: PALAVRAS -->
+  <div class="panel active">
+    <div class="card">
+      <h2>🔊 Ouça e repita</h2>
+      <p style="font-size:.9em;color:#5b6470;">Clique no botão azul 🔊 para ouvir. Pode ouvir quantas vezes quiser.</p>
+    </div>
+
+    <div class="card">
+      <h2>🌊 Animais do mar</h2>
+      <div class="vgrid" id="sea"></div>
+    </div>
+
+    <div class="card">
+      <h2>🌳 Animais da floresta</h2>
+      <div class="vgrid" id="wild"></div>
+    </div>
+
+    <div class="card">
+      <h2>✨ Palavras para descrever</h2>
+      <div class="vgrid" id="adj"></div>
+    </div>
+  </div>
+
+  <!-- ABA 1: REGRAS -->
+  <div class="panel">
+    <div class="card">
+      <h2>📏 Comparar DOIS animais</h2>
+      <div class="step"><span class="num">1</span> Quando comparo <b>dois</b> animais, eu uso a palavra <b>than</b> (lê-se "dén"). Ela quer dizer <b>do que</b>.</div>
+      <div class="step"><span class="num">2</span> Palavra <b>curta</b>: junto <b>-er</b> no fim.<br>big → <b>bigger</b> (maior)</div>
+      <div class="example">
+        <div class="en">The bear is bigger than the lizard.</div>
+        <div class="pt">O urso é maior do que o lagarto.</div>
+        <button class="listen" onclick="say('The bear is bigger than the lizard.')">🔊 Ouvir devagar</button>
+      </div>
+      <div class="step"><span class="num">3</span> Palavra <b>longa</b>: ponho <b>more</b> na frente.<br>dangerous → <b>more dangerous</b> (mais perigoso)</div>
+      <div class="example">
+        <div class="en">The shark is more dangerous than the crab.</div>
+        <div class="pt">O tubarão é mais perigoso do que o caranguejo.</div>
+        <button class="listen" onclick="say('The shark is more dangerous than the crab.')">🔊 Ouvir devagar</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>👑 O MAIS de todos</h2>
+      <div class="step"><span class="num">1</span> Quando um animal é o <b>campeão</b> de todos, começo com <b>the</b>.</div>
+      <div class="step"><span class="num">2</span> Palavra <b>curta</b>: junto <b>-est</b> no fim.<br>big → <b>the biggest</b> (o maior de todos)</div>
+      <div class="example">
+        <div class="en">The whale is the biggest.</div>
+        <div class="pt">A baleia é a maior de todas.</div>
+        <button class="listen" onclick="say('The whale is the biggest.')">🔊 Ouvir devagar</button>
+      </div>
+      <div class="step"><span class="num">3</span> Palavra <b>longa</b>: ponho <b>the most</b> na frente.<br>beautiful → <b>the most beautiful</b></div>
+      <div class="example">
+        <div class="en">The butterfly is the most beautiful.</div>
+        <div class="pt">A borboleta é a mais bonita de todas.</div>
+        <button class="listen" onclick="say('The butterfly is the most beautiful.')">🔊 Ouvir devagar</button>
+      </div>
+      <div class="hint">💡 Dica fácil: <b>than</b> = comparar dois. <b>the</b> = o mais de todos.</div>
+    </div>
+  </div>
+
+  <!-- ABA 2: TREINO -->
+  <div class="panel">
+    <div class="card">
+      <div id="quiz"></div>
+      <div class="nav">
+        <button id="repeatBtn" onclick="repeatAudio()">🔊 Ouvir de novo</button>
+        <button id="nextBtn" onclick="nextQ()" disabled>Próxima ➡</button>
+      </div>
+      <div class="stars" id="stars">⭐ 0</div>
+      <div class="progress" id="prog">Pergunta 1 de 6</div>
+    </div>
+    <div class="done" id="done">
+      <div class="big">🌟</div>
+      <h2 id="doneMsg">Muito bem!</h2>
+      <p id="doneScore"></p>
+      <button onclick="restart()">🔄 Treinar de novo</button>
+    </div>
+  </div>
+
+  <!-- ABA 3: JOGUINHO -->
+  <div class="panel">
+    <div class="card">
+      <h2>🎮 Certo ou Errado?</h2>
+      <p style="font-size:.9em;color:#5b6470;">Ouça a frase e diga se está <b>certa</b> ou <b>errada</b>. Sem pressa!</p>
+      <div id="game"></div>
+      <div class="nav">
+        <button id="gRepeat" onclick="gameRepeat()">🔊 Ouvir a frase</button>
+        <button id="gNext" onclick="gameNext()" disabled>Próxima ➡</button>
+      </div>
+      <div class="stars" id="gStars">⭐ 0</div>
+      <div class="progress" id="gProg">Frase 1 de 6</div>
+    </div>
+    <div class="done" id="gDone">
+      <div class="big">🏆</div>
+      <h2 id="gDoneMsg">Você conseguiu!</h2>
+      <p id="gDoneScore"></p>
+      <button onclick="gameStart()">🔄 Jogar de novo</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===== Áudio devagar ===== */
+function say(text,rate){
+  if(!('speechSynthesis' in window)){alert('Para ouvir, abra no Chrome ou Safari.');return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';
+  u.rate=(rate||0.8);
+  window.speechSynthesis.speak(u);
+}
+
+/* ===== Abas ===== */
+var panels=document.querySelectorAll('.panel');
+var tabs=document.querySelectorAll('.tab');
+function showTab(i,btn){
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  panels.forEach(function(p){p.classList.remove('active');});
+  tabs.forEach(function(t){t.classList.remove('active');});
+  panels[i].classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== Vocabulário (fixo, nunca vira) ===== */
+var sea=[['dolphin','golfinho'],['whale','baleia'],['seal','foca'],['seahorse','cavalo-marinho'],['shark','tubarão'],['crab','caranguejo']];
+var wild=[['eagle','águia'],['lizard','lagarto'],['parrot','papagaio'],['bear','urso'],['scorpion','escorpião'],['butterfly','borboleta'],['snake','cobra'],['spider','aranha']];
+var adj=[['big','grande'],['small','pequeno'],['long','comprido'],['beautiful','bonito'],['dangerous','perigoso'],['colorful','colorido'],['fast','rápido'],['mean','malvado']];
+
+function vcard(en,pt){
+  return '<div class="voc"><div><div class="word">'+en+'</div><div class="tr">'+pt+'</div></div>'+
+         '<button class="lbtn" onclick="say(\''+en+'\')">🔊</button></div>';
+}
+document.getElementById('sea').innerHTML=sea.map(function(w){return vcard(w[0],w[1]);}).join('');
+document.getElementById('wild').innerHTML=wild.map(function(w){return vcard(w[0],w[1]);}).join('');
+document.getElementById('adj').innerHTML=adj.map(function(w){return vcard(w[0],w[1]);}).join('');
+
+/* ===== Treino (uma pergunta por vez) ===== */
+var Q=[
+ {ask:'O urso é maior. Como falo "maior"?',say:'The bear is bigger than the lizard.',o:['bigger','more big','biggest'],a:0,e:'"big" é curta, então junto -er: bigger. 🐻'},
+ {ask:'A baleia é a maior de TODAS. Qual está certo?',say:'The whale is the biggest.',o:['the biggest','bigger','the most big'],a:0,e:'O mais de todos começa com the e termina em -est: the biggest. 🐋'},
+ {ask:'O tubarão é mais perigoso. Como falo "mais perigoso"?',say:'The shark is more dangerous than the crab.',o:['more dangerous','dangerouser','most dangerous'],a:0,e:'"dangerous" é longa, então uso more na frente. 🦈'},
+ {ask:'A borboleta é a mais bonita de todas. Qual está certo?',say:'The butterfly is the most beautiful.',o:['the most beautiful','the beautifulest','more beautiful'],a:0,e:'Palavra longa + campeã = the most beautiful. 🦋'},
+ {ask:'O cavalo-marinho é o menor de todos. Qual está certo?',say:'The seahorse is the smallest.',o:['the smallest','smaller','the most small'],a:0,e:'"small" é curta: the smallest. 🐴'},
+ {ask:'A cobra é mais comprida que o lagarto. Como falo "mais comprida"?',say:'The snake is longer than the lizard.',o:['longer','more long','longest'],a:0,e:'"long" é curta, então longer. 🐍'}
+];
+var qi=0, qStars=0, qLocked=false;
+
+function showQ(){
+  qLocked=false;
+  var item=Q[qi];
+  var opts='';
+  for(var k=0;k<item.o.length;k++){
+    opts+='<button class="opt" onclick="answerQ('+k+',this)">'+item.o[k]+'</button>';
+  }
+  document.getElementById('quiz').innerHTML=
+    '<div class="q"><div class="ask">'+(qi+1)+') '+item.ask+'</div>'+
+    '<button class="listen big" onclick="say(\''+item.say.replace(/'/g,"\\'")+'\')">🔊 Ouvir a frase</button>'+
+    opts+'<div class="fb" id="fb"></div></div>';
+  document.getElementById('nextBtn').disabled=true;
+  document.getElementById('nextBtn').textContent=(qi===Q.length-1)?'Ver fim 🏁':'Próxima ➡';
+  document.getElementById('prog').textContent='Pergunta '+(qi+1)+' de '+Q.length;
+}
+function answerQ(k,btn){
+  if(qLocked)return; qLocked=true;
+  var item=Q[qi];
+  var opts=document.querySelectorAll('#quiz .opt');
+  opts.forEach(function(o,idx){o.disabled=true; if(idx===item.a)o.classList.add('ok');});
+  var fb=document.getElementById('fb');
+  if(k===item.a){qStars++; fb.className='fb good'; fb.innerHTML='✅ Isso mesmo! '+item.e;}
+  else{btn.classList.add('no'); fb.className='fb try'; fb.innerHTML='🙂 A resposta certa está em verde. '+item.e;}
+  say(item.say);
+  document.getElementById('stars').textContent='⭐ '+qStars;
+  document.getElementById('nextBtn').disabled=false;
+}
+function repeatAudio(){ say(Q[qi].say); }
+function nextQ(){
+  if(qi<Q.length-1){qi++; showQ();}
+  else{
+    document.getElementById('quiz').parentElement.style.display='none';
+    var d=document.getElementById('done'); d.classList.add('show');
+    document.getElementById('doneScore').textContent='Você ganhou '+qStars+' de '+Q.length+' estrelas!';
+    document.getElementById('doneMsg').textContent=(qStars>=5?'Você arrasou! 🎉':(qStars>=3?'Muito bem! 👏':'Bom treino! Vamos de novo? 💪'));
+  }
+}
+function restart(){
+  qi=0;qStars=0;
+  document.getElementById('stars').textContent='⭐ 0';
+  document.getElementById('done').classList.remove('show');
+  document.getElementById('quiz').parentElement.style.display='block';
+  showQ();
+}
+showQ();
+
+/* ===== Joguinho Certo ou Errado ===== */
+var G=[
+ {s:'The whale is the biggest.',correct:true,why:'Certo! A baleia é a maior de todas. 🐋'},
+ {s:'The bear is more bigger than the ant.',correct:false,why:'Errado! Não se usa more com -er. O certo é "bigger than". 🐻'},
+ {s:'The butterfly is the most beautiful.',correct:true,why:'Certo! Palavra longa usa the most. 🦋'},
+ {s:'The seahorse is the most small.',correct:false,why:'Errado! "small" é curta: o certo é "the smallest". 🐴'},
+ {s:'The shark is more dangerous than the crab.',correct:true,why:'Certo! Palavra longa usa more...than. 🦈'},
+ {s:'The snake is longest than the lizard.',correct:false,why:'Errado! Para comparar dois é "longer than". 🐍'}
+];
+var gi=0, gStars=0, gLocked=false;
+
+function showG(){
+  gLocked=false;
+  var item=G[gi];
+  document.getElementById('game').innerHTML=
+    '<div class="example"><div class="en">'+item.s+'</div></div>'+
+    '<button class="opt" onclick="answerG(true,this)">✅ Está CERTA</button>'+
+    '<button class="opt" onclick="answerG(false,this)">❌ Está ERRADA</button>'+
+    '<div class="fb" id="gfb"></div>';
+  document.getElementById('gNext').disabled=true;
+  document.getElementById('gNext').textContent=(gi===G.length-1)?'Ver fim 🏁':'Próxima ➡';
+  document.getElementById('gProg').textContent='Frase '+(gi+1)+' de '+G.length;
+  say(item.s);
+}
+function answerG(choice,btn){
+  if(gLocked)return; gLocked=true;
+  var item=G[gi];
+  var opts=document.querySelectorAll('#game .opt');
+  opts.forEach(function(o){o.disabled=true;});
+  var fb=document.getElementById('gfb');
+  if(choice===item.correct){gStars++; btn.classList.add('ok'); fb.className='fb good'; fb.innerHTML='⭐ '+item.why;}
+  else{btn.classList.add('no'); fb.className='fb try'; fb.innerHTML='🙂 '+item.why;}
+  document.getElementById('gStars').textContent='⭐ '+gStars;
+  document.getElementById('gNext').disabled=false;
+}
+function gameRepeat(){ say(G[gi].s); }
+function gameNext(){
+  if(gi<G.length-1){gi++; showG();}
+  else{
+    document.getElementById('game').parentElement.style.display='none';
+    var d=document.getElementById('gDone'); d.classList.add('show');
+    document.getElementById('gDoneScore').textContent='Você ganhou '+gStars+' de '+G.length+' estrelas!';
+    document.getElementById('gDoneMsg').textContent=(gStars>=5?'Incrível! 🏆':(gStars>=3?'Muito bem! 👏':'Bom jogo! Tenta de novo? 💪'));
+  }
+}
+function gameStart(){
+  gi=0;gStars=0;
+  document.getElementById('gStars').textContent='⭐ 0';
+  document.getElementById('gDone').classList.remove('show');
+  document.getElementById('game').parentElement.style.display='block';
+  showG();
+}
+showG();
+</script>
+</body>
+</html>
